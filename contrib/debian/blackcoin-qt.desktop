@@ -1,12 +1,12 @@
 [Desktop Entry]
 Encoding=UTF-8
-Name=BlackCoin
-Comment=BlackCoin P2P Cryptocurrency
-Comment[fr]=BlackCoin, monnaie virtuelle cryptographique pair à pair
-Comment[tr]=BlackCoin, eşten eşe kriptografik sanal para birimi
-Exec=/usr/bin/blackcoin-qt
+Name=batjorge
+Comment=batjorge P2P Cryptocurrency
+Comment[fr]=batjorge, monnaie virtuelle cryptographique pair à pair
+Comment[tr]=batjorge, eşten eşe kriptografik sanal para birimi
+Exec=/usr/bin/batjorge-qt
 Terminal=false
 Type=Application
 Icon=/usr/share/pixmaps/bitcoin80.xpm
-MimeType=x-scheme-handler/blackcoin;
+MimeType=x-scheme-handler/batjorge;
 Categories=Office;

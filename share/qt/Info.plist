@@ -7,23 +7,23 @@
 	<key>CFBundlePackageType</key>
 	<string>APPL</string>
 	<key>CFBundleGetInfoString</key>
-	<string>BlackCoin-Qt</string>
+	<string>batjorge-Qt</string>
 	<key>CFBundleSignature</key>
 	<string>????</string>
 	<key>CFBundleExecutable</key>
-	<string>BlackCoin-Qt</string>
+	<string>batjorge-Qt</string>
 	<key>CFBundleIdentifier</key>
-	<string>co.blackcoin.BlackCoin-Qt</string>
+	<string>co.batjorge.batjorge-Qt</string>
         <key>CFBundleURLTypes</key>
         <array>
           <dict>
             <key>CFBundleTypeRole</key>
             <string>Editor</string>
             <key>CFBundleURLName</key>
-            <string>co.blackcoin.BlackCoinPayment</string>
+            <string>co.batjorge.batjorgePayment</string>
             <key>CFBundleURLSchemes</key>
             <array>
-              <string>blackcoin</string>
+              <string>batjorge</string>
             </array>
           </dict>
         </array>
