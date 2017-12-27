@@ -52,7 +52,7 @@ public:
         pchMessageStart[1] = 0x35;
         pchMessageStart[2] = 0x22;
         pchMessageStart[3] = 0x05;
-        vAlertPubKey = ParseHex("0486bce1bac0d543f104cbff2bd23680056a3b9ea05e1137d2ff90eeb5e08472eb500322593a2cb06fbf8297d7beb6cd30cb90f98153b5b7cce1493749e41e0284");
+        vAlertPubKey = ParseHex("04aa27f4e80d16ee6b6d58d607ac7526aa82b5f0216643feb7f7c76e5db96d6deb150c27117da9973f433bb59ad0e1ff0eb71df80f05c7496d7b93336fa6cb2801");
         nDefaultPort = 17654;
         nRPCPort = 17655;
         bnProofOfWorkLimit = CBigNum(~uint256(0) >> 20);
@@ -65,25 +65,64 @@ public:
         //    CTxIn(COutPoint(0000000000, 4294967295), coinbase 00012a24323020466562203230313420426974636f696e2041544d7320636f6d6520746f20555341)
         //    CTxOut(empty)
         //  vMerkleTree: 12630d16a9
-        const char* pszTimestamp = "20 Feb 2014 Bitcoin ATMs come to USA";
+        const char* pszTimestamp = "CNN 27/Dec2017 Prince Harry sidesteps Obama-Trump wedding guest list controversy";
         std::vector<CTxIn> vin;
         vin.resize(1);
         vin[0].scriptSig = CScript() << 0 << CBigNum(42) << vector<unsigned char>((const unsigned char*)pszTimestamp, (const unsigned char*)pszTimestamp + strlen(pszTimestamp));
         std::vector<CTxOut> vout;
         vout.resize(1);
         vout[0].SetEmpty();
-        CTransaction txNew(1, 1393221600, vin, vout, 0);
+        CTransaction txNew(1, 1514394000, vin, vout, 0);
         genesis.vtx.push_back(txNew);
         genesis.hashPrevBlock = 0;
         genesis.hashMerkleRoot = genesis.BuildMerkleTree();
         genesis.nVersion = 1;
-        genesis.nTime    = 1393221600;
+        genesis.nTime    = 1514394000;
         genesis.nBits    = bnProofOfWorkLimit.GetCompact();
-        genesis.nNonce   = 164482;
+        genesis.nNonce   = 224053;
 
         hashGenesisBlock = genesis.GetHash();
-        assert(hashGenesisBlock == uint256("0x000001faef25dec4fbcf906e6242621df2c183bf232f263d0ba5b101911e4563"));
-        assert(genesis.hashMerkleRoot == uint256("0x12630d16a97f24b287c8c2594dda5fb98c9e6c70fc61d44191931ea2aa08dc90"));
+
+	/*
+	 *
+	 *
+	 */
+
+	/*
+	hashGenesisBlock = uint256("0x01");
+	if (true && genesis.GetHash() != hashGenesisBlock)
+	{
+	printf("Searching for genesis block...\n");
+	uint256 hashTarget = CBigNum().SetCompact(genesis.nBits).getuint256();
+	uint256 thash;
+
+	while (true)
+	{
+	thash = genesis.GetHash();
+	if (thash <= hashTarget)
+	   break;
+	if ((genesis.nNonce & 0xFFF) == 0)
+	{
+	   printf("nonce %08X: hash = %s (target = %s)\n", genesis.nNonce, thash.ToString().c_str(), hashTarget.ToString().c_str());
+	}
+	++genesis.nNonce;
+	if (genesis.nNonce == 0)
+	{
+	   printf("NONCE WRAPPED, incrementing time\n");
+	   ++genesis.nTime;
+	}
+	}
+	printf("genesis.nTime = %u \n", genesis.nTime);
+	printf("genesis.nNonce = %u \n", genesis.nNonce);
+	printf("genesis.nVersion = %u \n", genesis.nVersion);
+	printf("genesis.GetHash = %s\n", genesis.GetHash().ToString().c_str()); //  first this, then comment this line out and uncomment the one under.
+	printf("genesis.hashMerkleRoot = %s \n", genesis.hashMerkleRoot.ToString().c_str());   // find merkle root
+
+       	}
+	*/
+
+        assert(hashGenesisBlock == uint256("0x00000512a3e6056266049cf37482e69b7fea8ef7d0fff06f4f4ddb6d2ba08e9e"));
+        assert(genesis.hashMerkleRoot == uint256("0xfcd854e175887ab3b11c7f506c4d3e11bb48045f3e448be190b8ad0ae5ace4d1"));
 
         vSeeds.push_back(CDNSSeedData("seed1.batjorge.com", "seed2.batjorge.com"));
 
@@ -95,7 +134,7 @@ public:
 
         convertSeed6(vFixedSeeds, pnSeed6_main, ARRAYLEN(pnSeed6_main));
 
-        nLastPOWBlock = 10000000;
+        nLastPOWBlock = 10000;
     }
 
     virtual const CBlock& GenesisBlock() const { return genesis; }
@@ -126,16 +165,55 @@ public:
         pchMessageStart[2] = 0xc0;
         pchMessageStart[3] = 0xef;
         bnProofOfWorkLimit = CBigNum(~uint256(0) >> 16);
-        vAlertPubKey = ParseHex("0471dc165db490094d35cde15b1f5d755fa6ad6f2b5ed0f340e3f17f57389c3c2af113a8cbcc885bde73305a553b5640c83021128008ddf882e856336269080496");
+        vAlertPubKey = ParseHex("044d29af3758357b51e07c0322893eb04c3112406e56b0388b5e0b97be5e524bfee2a99c6538b69a7a3530b967663856438a4a03f2a3c4c8cb512381e2d8f56c2d");
         nDefaultPort = 27654;
         nRPCPort = 27655;
         strDataDir = "testnet";
 
         // Modify the testnet genesis block so the timestamp is valid for a later start.
         genesis.nBits  = bnProofOfWorkLimit.GetCompact();
-        genesis.nNonce = 216178;
+        genesis.nNonce = 176016;
         hashGenesisBlock = genesis.GetHash();
-        assert(hashGenesisBlock == uint256("0x0000724595fb3b9609d441cbfb9577615c292abf07d996d3edabc48de843642d"));
+	
+	/*
+	 *
+	 */
+
+	/*
+	hashGenesisBlock = uint256("0x01");
+	if (true && genesis.GetHash() != hashGenesisBlock)
+	{
+	printf("Searching for genesis block...\n");
+	uint256 hashTarget = CBigNum().SetCompact(genesis.nBits).getuint256();
+	uint256 thash;
+
+	while (true)
+	{
+	thash = genesis.GetHash();
+	if (thash <= hashTarget)
+	   break;
+	if ((genesis.nNonce & 0xFFF) == 0)
+	{
+	   printf("nonce %08X: hash = %s (target = %s)\n", genesis.nNonce, thash.ToString().c_str(), hashTarget.ToString().c_str());
+	}
+	++genesis.nNonce;
+	if (genesis.nNonce == 0)
+	{
+	   printf("NONCE WRAPPED, incrementing time\n");
+	   ++genesis.nTime;
+	}
+	}
+	printf("genesis.nTime = %u \n", genesis.nTime);
+	printf("genesis.nNonce = %u \n", genesis.nNonce);
+	printf("genesis.nVersion = %u \n", genesis.nVersion);
+	printf("genesis.GetHash = %s\n", genesis.GetHash().ToString().c_str()); //  first this, then comment this line out and uncomment the one under.
+	printf("genesis.hashMerkleRoot = %s \n", genesis.hashMerkleRoot.ToString().c_str());   // find merkle root
+
+       	}
+	*/
+	
+
+        assert(hashGenesisBlock == uint256("0x00005125dd6a8e60d2012ba971b5a035354faceb9b0a1e476d9e2f638b2edfb7"));
 
         vFixedSeeds.clear();
         vSeeds.clear();
@@ -148,7 +226,7 @@ public:
 
         convertSeed6(vFixedSeeds, pnSeed6_test, ARRAYLEN(pnSeed6_test));
 
-        nLastPOWBlock = 0x7fffffff;
+        nLastPOWBlock = 10000;
     }
     virtual Network NetworkID() const { return CChainParams::TESTNET; }
 };
@@ -168,11 +246,49 @@ public:
         bnProofOfWorkLimit = CBigNum(~uint256(0) >> 1);
         genesis.nTime = 1411111111;
         genesis.nBits  = bnProofOfWorkLimit.GetCompact();
-        genesis.nNonce = 2;
+        genesis.nNonce = 5;
         hashGenesisBlock = genesis.GetHash();
-        nDefaultPort = 18444;
+        nDefaultPort = 27656;
         strDataDir = "regtest";
-        assert(hashGenesisBlock == uint256("0x523dda6d336047722cbaf1c5dce622298af791bac21b33bf6e2d5048b2a13e3d"));
+
+	/*
+	 *
+	 */
+
+	/*
+	hashGenesisBlock = uint256("0x01");
+	if (true && genesis.GetHash() != hashGenesisBlock)
+	{
+	printf("Searching for genesis block...\n");
+	uint256 hashTarget = CBigNum().SetCompact(genesis.nBits).getuint256();
+	uint256 thash;
+
+	while (true)
+	{
+	thash = genesis.GetHash();
+	if (thash <= hashTarget)
+	   break;
+	if ((genesis.nNonce & 0xFFF) == 0)
+	{
+	   printf("nonce %08X: hash = %s (target = %s)\n", genesis.nNonce, thash.ToString().c_str(), hashTarget.ToString().c_str());
+	}
+	++genesis.nNonce;
+	if (genesis.nNonce == 0)
+	{
+	   printf("NONCE WRAPPED, incrementing time\n");
+	   ++genesis.nTime;
+	}
+	}
+	printf("genesis.nTime = %u \n", genesis.nTime);
+	printf("genesis.nNonce = %u \n", genesis.nNonce);
+	printf("genesis.nVersion = %u \n", genesis.nVersion);
+	printf("genesis.GetHash = %s\n", genesis.GetHash().ToString().c_str()); //  first this, then comment this line out and uncomment the one under.
+	printf("genesis.hashMerkleRoot = %s \n", genesis.hashMerkleRoot.ToString().c_str());   // find merkle root
+
+       	}
+	*/
+
+        assert(hashGenesisBlock == uint256("0x1e49973782c3f66cfe98fbde1faf2458a2946cbdfd344c1704db386f0380dafd"));
 
         vSeeds.clear();  // Regtest mode doesn't have any DNS seeds.
     }
