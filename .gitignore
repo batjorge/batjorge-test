@@ -11,9 +11,13 @@ src/build.h
 *.o
 *.patch
 .batjorge
+.qmake.stash
 #compilation and Qt preprocessor part
 *.qm
 Makefile
+Makefile.Debug
+Makefile.Release
+batjorge-qt_plugin_import.cpp
 batjorge-qt
 #resources cpp
 qrc_*.cpp
