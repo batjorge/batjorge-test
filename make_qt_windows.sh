@@ -2,7 +2,7 @@
 test -f batjorge-qt.pro || exit 1
 if ! test -e /mnt/mxe; then echo "mxe env not found"; exit 1; fi
 
-T1=`date +%s`
+DATE=`date +%s`
 
 cd src/leveldb
 make clean
@@ -29,8 +29,8 @@ i686-w64-mingw32.static-qmake-qt5 \
 	QMAKE_LRELEASE=/mnt/mxe/usr/i686-w64-mingw32.static/qt5/bin/lrelease batjorge-qt.pro
 
 make -f Makefile.Release VERBOSE=1
-
-test -f release/batjorge-qt.exe && echo "built=`pwd`/release/batjorge-qt.exe size=`du -h release/batjorge-qt.exe|cut -f1` bytes=`du -b release/batjorge-qt.exe|cut -f1` sha256=`sha256sum release/batjorge-qt.exe|cut -d" " -f1`";
-let RT="`date +%s`-T1";
+test -e ~/release && test -f "release/batjorge-qt.exe" && echo "${DATE}: built=`pwd`/release/batjorge-qt.exe size=`du -h release/batjorge-qt.exe|cut -f1` bytes=`du -b release/batjorge-qt.exe|cut -f1` sha256=`sha256sum release/batjorge-qt.exe|cut -d" " -f1`" >> ~/release/built.log;
+let RT="`date +%s`-DATE";
 echo "runtime ${RT}s";
-cp -v release/batjorge-qt.exe /home/user/batjorge/
+test -e ~/release && test -f "release/batjorge-qt.exe" && mv -v "release/batjorge-qt.exe" "/home/batjorge/release/batjorge-qt.exe_${DATE}";
+

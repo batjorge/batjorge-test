@@ -25,12 +25,15 @@ namespace Checkpoints
     //    timestamp before)
     // + Contains no strange transactions
     //
-    static MapCheckpoints mapCheckpoints =
+    //
+    static MapCheckpoints mapCheckpoints = 
         boost::assign::map_list_of
-        ( 1,   uint256("0xb0415c22841c87bf1b9323c904a21ecccb5bd91911248b1386ae089024064a75") )
-	( 16,  uint256("0xbe656b58f0e8e790ba7b55e89aa4abb6c54d611e250a03778ecb5f15d803e16c") )
-	( 32,  uint256("0x0dff53b58321d95dba4a3ee7b4d920020e5cfdc092dd1d704cbfc2ef616dbd58") )
-	( 50,  uint256("0xc5caaec5eb8250aca79e87963c1859dcbe61cb58c9654fa2adccb15577f386f5") )
+	(       0, uint256("0x00000e0f29299cb61417ca4433a11ff61b057113338f30b5f89ff9f88c3d8cba") )
+	(       1, uint256("0xb7efed5ad540199084fb5efdd9951d3599960020b79c72e90bf663ad20d9df9d") )
+	(      10, uint256("0xae5cc44910325a7b6514acdfe117012eb34998baf0410c346df7eb50d23389e3") )
+	(      20, uint256("0xea4bc2729a5315edb39f0f16fb64470258fcc7197bdecacfb8a431befc667fa6") )
+	(      30, uint256("0xe88177619c475ac32ef236cc21eb847a3f938f50048aff89eb06001f3fcb6a8c") )
+
     ;
 
     // TestNet has no checkpoints
