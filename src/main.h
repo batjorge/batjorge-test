@@ -43,7 +43,7 @@ static const unsigned int DEFAULT_MAX_ORPHAN_BLOCKS = 40;
 /** The maximum number of entries in an 'inv' protocol message */
 static const unsigned int MAX_INV_SZ = 50000;
 /** Fees smaller than this (in satoshi) are considered zero fee (for transaction creation) */
-static const int64_t MIN_TX_FEE = 1000;
+static const int64_t MIN_TX_FEE = 1;
 /** Fees smaller than this (in satoshi) are considered zero fee (for relaying) */
 static const int64_t MIN_RELAY_TX_FEE = MIN_TX_FEE;
 /** No amount larger than this (in satoshi) is valid */
@@ -56,7 +56,7 @@ static const int64_t COIN_YEAR_REWARD = 3.14 * CENT; // % per year
 
 inline bool IsProtocolV1RetargetingFixed(int nHeight) { return TestNet() || nHeight > 10; }
 inline bool IsProtocolV2(int nHeight) { return TestNet() || nHeight > 0; }
-inline bool IsProtocolV3(int64_t nTime) { return TestNet() || nTime > 1514761201; }
+inline bool IsProtocolV3(int64_t nTime) { return TestNet() || nTime > 1514502000; }
 
 inline int64_t FutureDriftV1(int64_t nTime) { return nTime + 10 * 60; }
 inline int64_t FutureDriftV2(int64_t nTime) { return nTime + 10 * 60; }
