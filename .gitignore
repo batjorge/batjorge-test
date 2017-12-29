@@ -1,6 +1,6 @@
 src/*.exe
 src/batjorge-qt
-src/batjorgedd
+src/batjorged
 src/test_batjorge
 src/build.h
 .*.swp
