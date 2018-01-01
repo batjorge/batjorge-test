@@ -1,5 +1,8 @@
 #!/bin/sh
 DATE=`date +%s`
+cd src/leveldb
+make clean
+cd ../..
 make clean
 make distclean
 qmake

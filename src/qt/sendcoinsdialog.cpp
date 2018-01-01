@@ -457,7 +457,7 @@ void SendCoinsDialog::coinControlChangeEdited(const QString & text)
             ui->labelCoinControlChangeLabel->setText("");
         else if (!CBitcoinAddress(text.toStdString()).IsValid())
         {
-            ui->labelCoinControlChangeLabel->setStyleSheet("QLabel{color:red;}");
+            ui->labelCoinControlChangeLabel->setStyleSheet("QLabel{color:orange;}");
             ui->labelCoinControlChangeLabel->setText(tr("WARNING: Invalid batjorge address"));
         }
         else
@@ -474,7 +474,7 @@ void SendCoinsDialog::coinControlChangeEdited(const QString & text)
                     ui->labelCoinControlChangeLabel->setText(tr("(no label)"));
                 else
                 {
-                    ui->labelCoinControlChangeLabel->setStyleSheet("QLabel{color:red;}");
+                    ui->labelCoinControlChangeLabel->setStyleSheet("QLabel{color:orange;}");
                     ui->labelCoinControlChangeLabel->setText(tr("WARNING: unknown change address"));
                 }
             }
