@@ -1,5 +1,5 @@
 #!/bin/sh
-DATE=`date +%s`
+test -z $1 && DATE=`date +%s` || DATE=$1
 cd src/leveldb
 make clean
 cd ..

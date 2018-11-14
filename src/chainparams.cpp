@@ -48,11 +48,11 @@ public:
         // The message start string is designed to be unlikely to occur in normal data.
         // The characters are rarely used upper ASCII, not valid as UTF-8, and produce
         // a large 4-byte int at any alignment.
-        pchMessageStart[0] = 0x70;
-        pchMessageStart[1] = 0x35;
-        pchMessageStart[2] = 0x22;
-        pchMessageStart[3] = 0x05;
-        vAlertPubKey = ParseHex("04aa27f4e80d16ee6b6d58d607ac7526aa82b5f0216643feb7f7c76e5db96d6deb150c27117da9973f433bb59ad0e1ff0eb71df80f05c7496d7b93336fa6cb2801");
+        pchMessageStart[0] = 0xb1;
+        pchMessageStart[1] = 0x32;
+        pchMessageStart[2] = 0xb2;
+        pchMessageStart[3] = 0x64;
+        vAlertPubKey = ParseHex("04a14f57c57ffcc3328fcda59999e33a77701306b91bcc8efaf9d82bf4c93be9bdb1f80e1a6aa26677a98b4cfe32e63815ce4053f30aacceb6d6b748fe8ce28cdd");
         nDefaultPort = 17654;
         nRPCPort = 17655;
         bnProofOfWorkLimit = CBigNum(~uint256(0) >> 20);
@@ -65,21 +65,21 @@ public:
         //    CTxIn(COutPoint(0000000000, 4294967295), coinbase 00012a24323020466562203230313420426974636f696e2041544d7320636f6d6520746f20555341)
         //    CTxOut(empty)
         //  vMerkleTree: 12630d16a9
-        const char* pszTimestamp = "CNN 28/Dec/2017 US says Pyongyang has spent hundreds of millions on nuclear, chemical, biological weapons";
+        const char* pszTimestamp = "CNN 09/Nov/2018 Michelle Obama: I'll never forgive Trump";
         std::vector<CTxIn> vin;
         vin.resize(1);
         vin[0].scriptSig = CScript() << 0 << CBigNum(42) << vector<unsigned char>((const unsigned char*)pszTimestamp, (const unsigned char*)pszTimestamp + strlen(pszTimestamp));
         std::vector<CTxOut> vout;
         vout.resize(1);
         vout[0].SetEmpty();
-        CTransaction txNew(1, 1514441227, vin, vout, 0);
+        CTransaction txNew(1, 1541782800, vin, vout, 0);
         genesis.vtx.push_back(txNew);
         genesis.hashPrevBlock = 0;
         genesis.hashMerkleRoot = genesis.BuildMerkleTree();
         genesis.nVersion = 1;
-        genesis.nTime    = 1514441227;
+        genesis.nTime    = 1541782800;
         genesis.nBits    = bnProofOfWorkLimit.GetCompact();
-        genesis.nNonce   = 394893;
+        genesis.nNonce   = 3017471;
 
         hashGenesisBlock = genesis.GetHash();
 
@@ -119,10 +119,12 @@ public:
 	printf("genesis.hashMerkleRoot = %s \n", genesis.hashMerkleRoot.ToString().c_str());   // find merkle root
 
        	}
+	
 	*/
+	/* end genesis generation */
 
-        assert(hashGenesisBlock == uint256("0x00000e0f29299cb61417ca4433a11ff61b057113338f30b5f89ff9f88c3d8cba"));
-        assert(genesis.hashMerkleRoot == uint256("0x848408f5f71d2e33900e7cc62ac8332924bc3dd8c6cb60dbc62bbceba2c328d3"));
+        assert(hashGenesisBlock == uint256("0x00000289de5d7381e8498bdff3dc61bf0587f7af174fc4dfffeab65eb663aa7d"));
+        assert(genesis.hashMerkleRoot == uint256("0x7876eb03da3d82746951b93d3e2d821e5eff733fac95eb22dd29731bd7b8a7df"));
 
         vSeeds.push_back(CDNSSeedData("seed1.batjorge.com", "seed2.batjorge.com"));
 
@@ -134,7 +136,8 @@ public:
 
         convertSeed6(vFixedSeeds, pnSeed6_main, ARRAYLEN(pnSeed6_main));
 
-        nLastPOWBlock = 500;
+        nLastPOWBlockV1 = 10000;
+	
     }
 
     virtual const CBlock& GenesisBlock() const { return genesis; }
@@ -160,19 +163,19 @@ public:
         // The message start string is designed to be unlikely to occur in normal data.
         // The characters are rarely used upper ASCII, not valid as UTF-8, and produce
         // a large 4-byte int at any alignment.
-        pchMessageStart[0] = 0xcd;
-        pchMessageStart[1] = 0xf2;
-        pchMessageStart[2] = 0xc0;
-        pchMessageStart[3] = 0xef;
+        pchMessageStart[0] = 0xcc;
+        pchMessageStart[1] = 0xbb;
+        pchMessageStart[2] = 0xdd;
+        pchMessageStart[3] = 0xaa;
         bnProofOfWorkLimit = CBigNum(~uint256(0) >> 16);
-        vAlertPubKey = ParseHex("044d29af3758357b51e07c0322893eb04c3112406e56b0388b5e0b97be5e524bfee2a99c6538b69a7a3530b967663856438a4a03f2a3c4c8cb512381e2d8f56c2d");
+        vAlertPubKey = ParseHex("04f0a76f083364198910a9de263e57e56b113b6b4c8be57f1867cb4d48a51eb771f51cd7461205372d920a3b9ab82fc18e533579b671ba1c94c352feefeec3d9ec");
         nDefaultPort = 27654;
         nRPCPort = 27655;
         strDataDir = "testnet";
 
         // Modify the testnet genesis block so the timestamp is valid for a later start.
         genesis.nBits  = bnProofOfWorkLimit.GetCompact();
-        genesis.nNonce = 148298;
+        genesis.nNonce = 28120;
         hashGenesisBlock = genesis.GetHash();
 	
 	/*
@@ -211,9 +214,10 @@ public:
 
        	}
 	*/
+	/* end genesis testnet */
 	
 
-        assert(hashGenesisBlock == uint256("0x000052e37859879ea074b8cf035b222a2b223d845af96bc120d30fa03f03c410"));
+        assert(hashGenesisBlock == uint256("0x000044829117ed26e6b3e8d2f7c7e69ac22ff207c0c8fb19b2f2ad898599b9ad"));
 
         vFixedSeeds.clear();
         vSeeds.clear();
@@ -286,8 +290,9 @@ public:
 
        	}
 	*/
+	/* end genesis regtest */
 
-        assert(hashGenesisBlock == uint256("0x63a389c9642b1025f3f397454f5f75acf8d5cd1a253549dfafab9f9169233abf"));
+        assert(hashGenesisBlock == uint256("0x5527c4dad68174bf268821cfcdd58f587d65013fa23bbc281f1223056e809c3c"));
 
         vSeeds.clear();  // Regtest mode doesn't have any DNS seeds.
     }

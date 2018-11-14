@@ -17,6 +17,7 @@
 #include "txdb.h"
 #include "txmempool.h"
 #include "ui_interface.h"
+#include "rpcserver.h"
 
 using namespace std;
 using namespace boost;
@@ -42,11 +43,11 @@ set<pair<COutPoint, unsigned int> > setStakeSeen;
 CBigNum bnProofOfStakeLimit(~uint256(0) >> 20);
 CBigNum bnProofOfStakeLimitV2(~uint256(0) >> 48);
 
-int nStakeMinConfirmations = 50;
-unsigned int nStakeMinAge = 3 * 60 * 60; // 3 hours
+int nStakeMinConfirmations = 500;
+unsigned int nStakeMinAge = 12 * 60 * 60; // 12 hours
 unsigned int nModifierInterval = 10 * 60; // time to elapse before new modifier is computed
 
-int nCoinbaseMaturity = 50;
+int nCoinbaseMaturity = 500;
 CBlockIndex* pindexGenesisBlock = NULL;
 int nBestHeight = -1;
 
@@ -968,13 +969,16 @@ static CBigNum GetProofOfStakeLimit(int nHeight)
         return bnProofOfStakeLimit;
 }
 
-// miner's coin base reward
-int64_t GetProofOfWorkReward(int64_t nFees)
+int64_t GetProofOfWorkRewardBatJorge(int64_t nFees, int nHeight)
 {
-    int64_t nSubsidy = 10000 * COIN;
+    int64_t nSubsidy = nFees + 0.00101101 * COIN;
+   
+    if(nHeight <= Params().LastPOWBlockV1())
+    {
+	nSubsidy += 101101 * COIN;
+    }
 
-    LogPrint("creation", "GetProofOfWorkReward() : create=%s nSubsidy=%d\n", FormatMoney(nSubsidy), nSubsidy);
-
+    LogPrint("creation", "GetProofOfWorkRewardBatJorge() : height=%s create=%s nSubsidy=%d\n", nHeight, FormatMoney(nSubsidy), nSubsidy);
     return nSubsidy;
 }
 
@@ -983,12 +987,6 @@ int64_t GetProofOfStakeReward(const CBlockIndex* pindexPrev, int64_t nCoinAge, i
 {
     int64_t nSubsidy;
         nSubsidy = nCoinAge * COIN_YEAR_REWARD * 33.0 / (365 * 33 + 8);
-    /*
-    if (IsProtocolV3(pindexPrev->nTime))
-        nSubsidy = COIN * 3 / 2;
-    else
-        nSubsidy = nCoinAge * COIN_YEAR_REWARD * 33 / (365 * 33 + 8);
-    */
 
     LogPrint("creation", "GetProofOfStakeReward(): create=%s nCoinAge=%d\n", FormatMoney(nSubsidy), nCoinAge);
 
@@ -1512,7 +1510,7 @@ bool CBlock::ConnectBlock(CTxDB& txdb, CBlockIndex* pindex, bool fJustCheck)
 
     if (IsProofOfWork())
     {
-        int64_t nReward = GetProofOfWorkReward(nFees);
+        int64_t nReward = GetProofOfWorkRewardBatJorge(nFees, pindex->nHeight);
         // Check coinbase reward
         if (vtx[0].GetValueOut() > nReward)
             return DoS(50, error("ConnectBlock() : coinbase reward exceeded (actual=%d vs calculated=%d)",
@@ -2045,7 +2043,7 @@ bool CBlock::AcceptBlock()
         return DoS(100, error("AcceptBlock() : reject too new nVersion = %d", nVersion));
     */
 
-    if (IsProofOfWork() && nHeight > Params().LastPOWBlock())
+    if (IsProofOfWork() && nHeight > Params().LastPOWBlockV1())
         return DoS(100, error("AcceptBlock() : reject proof-of-work at height %d", nHeight));
 
     // Check coinbase timestamp

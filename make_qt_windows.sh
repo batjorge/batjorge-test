@@ -2,7 +2,7 @@
 test -f batjorge-qt.pro || exit 1
 if ! test -e /mnt/mxe; then echo "mxe env not found"; exit 1; fi
 
-DATE=`date +%s`
+test -z $1 && DATE=`date +%s` || DATE=$1
 
 cd src/leveldb
 make clean
