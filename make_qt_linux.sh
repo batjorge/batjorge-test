@@ -5,8 +5,8 @@ make clean
 cd ../..
 make clean
 make distclean
-qmake
-make
+qmake #USE_QR_CODE=0 USE_UPNP=-
+make #"BOOST_LIB_SUFFIX=-mt"
 test -e ~/release && test -f batjorge-qt && echo "${DATE}: built=`pwd`/batjorge-qt size=`du -h batjorge-qt|cut -f1` bytes=`du -b batjorge-qt|cut -f1` sha256=`sha256sum batjorge-qt|cut -d" " -f1`" >> ~/release/built.log;
 let RT="`date +%s`-DATE";
 echo "runtime ${RT}s";
